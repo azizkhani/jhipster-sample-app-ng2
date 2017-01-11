@@ -1,0 +1,64 @@
+<div>
+    <h2><span jhiTranslate="jhipsterApp.bankAccount.home.title">Bank Accounts</span>
+        <button class="btn btn-primary float-xs-right" uiSref="bank-account.new">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="jhipsterApp.bankAccount.home.createLabel">
+            Create new Bank Account
+            </span>
+        </button></h2>
+    <jhi-alert></jhi-alert>
+
+    <div class="container-fluid">
+        <div class="row">
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="bankAccounts">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="jhipsterApp.bankAccount.name">Name</span></th>
+            <th><span jhiTranslate="jhipsterApp.bankAccount.balance">Balance</span></th>
+            <th><span jhiTranslate="jhipsterApp.bankAccount.user">User</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let bankAccount of bankAccounts ;trackBy trackId">
+                <td><a uiSref="bank-account-detail" [uiParams]="{ id: bankAccount.id }">{{bankAccount.id}}</a></td>
+                <td>{{bankAccount.name}}</td>
+                <td>{{bankAccount.balance}}</td>
+                <td>
+                    {{bankAccount.user?.login}}
+                </td>
+                <td class="text-xs-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                uiSref="bank-account-detail"
+                                [uiParams]="{ id: bankAccount.id }"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-xs hidden-sm" jhiTranslate="entity.action.view"></span>
+                        </button>
+                        <button type="submit"
+                                uiSref="bank-account.edit"
+                                [uiParams]="{ id: bankAccount.id }"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-xs hidden-sm" jhiTranslate="entity.action.edit"></span>
+                        </button>
+                        <button type="submit"
+                                uiSref="bank-account.delete"
+                                [uiParams]="{ id: bankAccount.id }"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-xs hidden-sm" jhiTranslate="entity.action.delete"></span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

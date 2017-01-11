@@ -1,0 +1,58 @@
+<div>
+    <h2><span jhiTranslate="jhipsterApp.label.home.title">Labels</span>
+        <button class="btn btn-primary float-xs-right" uiSref="label.new">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="jhipsterApp.label.home.createLabel">
+            Create new Label
+            </span>
+        </button></h2>
+    <jhi-alert></jhi-alert>
+
+    <div class="container-fluid">
+        <div class="row">
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="labels">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="jhipsterApp.label.label">Label</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let label of labels ;trackBy trackId">
+                <td><a uiSref="label-detail" [uiParams]="{ id: label.id }">{{label.id}}</a></td>
+                <td>{{label.label}}</td>
+                <td class="text-xs-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                uiSref="label-detail"
+                                [uiParams]="{ id: label.id }"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-xs hidden-sm" jhiTranslate="entity.action.view"></span>
+                        </button>
+                        <button type="submit"
+                                uiSref="label.edit"
+                                [uiParams]="{ id: label.id }"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-xs hidden-sm" jhiTranslate="entity.action.edit"></span>
+                        </button>
+                        <button type="submit"
+                                uiSref="label.delete"
+                                [uiParams]="{ id: label.id }"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-xs hidden-sm" jhiTranslate="entity.action.delete"></span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

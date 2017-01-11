@@ -1,0 +1,42 @@
+
+<div *ngIf="operation">
+    <h2><span jhiTranslate="jhipsterApp.operation.detail.title">Operation</span> {{operation.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row">
+        <dt><span jhiTranslate="jhipsterApp.operation.date">Date</span></dt>
+        <dd>
+            <span>{{operation.date | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.operation.description">Description</span></dt>
+        <dd>
+            <span>{{operation.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.operation.amount">Amount</span></dt>
+        <dd>
+            <span>{{operation.amount}}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.operation.bankAccount">Bank Account</span></dt>
+        <dd>
+            <a uiSref="bank-account-detail" [uiParams]="{id:operation.bankAccount?.id}">{{operation.bankAccount?.name}}</a>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.operation.label">Label</span></dt>
+        <dd>
+            <span *ngFor="let label of operation.labels">
+                <a uiSref="label-detail" [uiParams]="{id: label.id}">{{label.label}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            uiSref="operation"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            uiSref="operation.edit" [uiParams]="{ id: operation.id }"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

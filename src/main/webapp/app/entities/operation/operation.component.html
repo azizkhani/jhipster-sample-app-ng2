@@ -1,0 +1,66 @@
+<div>
+    <h2><span jhiTranslate="jhipsterApp.operation.home.title">Operations</span>
+        <button class="btn btn-primary float-xs-right" uiSref="operation.new">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="jhipsterApp.operation.home.createLabel">
+            Create new Operation
+            </span>
+        </button></h2>
+    <jhi-alert></jhi-alert>
+
+    <div class="container-fluid">
+        <div class="row">
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="operations">
+        <table class="table table-striped">
+            <thead>
+            <tr jh-sort (predicate)="predicate" (ascending)="reverse" (callback)="reset">
+            <th jh-sort-by="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jh-sort-by="date"><span jhiTranslate="jhipsterApp.operation.date">Date</span> <span class="fa fa-sort"></span></th>
+            <th jh-sort-by="description"><span jhiTranslate="jhipsterApp.operation.description">Description</span> <span class="fa fa-sort"></span></th>
+            <th jh-sort-by="amount"><span jhiTranslate="jhipsterApp.operation.amount">Amount</span> <span class="fa fa-sort"></span></th>
+            <th jh-sort-by="bankAccount.name"><span jhiTranslate="jhipsterApp.operation.bankAccount">Bank Account</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let operation of operations ;trackBy trackId">
+                <td><a uiSref="operation-detail" [uiParams]="{ id: operation.id }">{{operation.id}}</a></td>
+                <td>{{operation.date | date:'medium'}}</td>
+                <td>{{operation.description}}</td>
+                <td>{{operation.amount}}</td>
+                <td>
+                    <a uiSref="bank-account-detail" [uiParams]="{ id: operation.bankAccount?.id }">{{operation.bankAccount?.name}}</a>
+                </td>
+                <td class="text-xs-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                uiSref="operation-detail"
+                                [uiParams]="{ id: operation.id }"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-xs hidden-sm" jhiTranslate="entity.action.view"></span>
+                        </button>
+                        <button type="submit"
+                                uiSref="operation.edit"
+                                [uiParams]="{ id: operation.id }"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-xs hidden-sm" jhiTranslate="entity.action.edit"></span>
+                        </button>
+                        <button type="submit"
+                                uiSref="operation.delete"
+                                [uiParams]="{ id: operation.id }"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-xs hidden-sm" jhiTranslate="entity.action.delete"></span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
